@@ -13,10 +13,10 @@ function onSearch(e) {
 
     console.log(searchValue);
 
-    // const API_KEY = "31894288-d396035e6b984cce02ff6ba47";
+    const API_KEY = "31894288-d396035e6b984cce02ff6ba47";
 
-    const URL = `https://pixabay.com/api/?key=31894288-d396035e6b984cce02ff6ba47
-    &q=${searchValue}&per_page=10&page=1
+    const URL = `https://pixabay.com/api/?key=${API_KEY}
+    &q=${searchValue}&per_page=20&page=1
     &image_type=fhoto&orientation=horizontal&safesearch=true`
 
     fetch(URL).then(response => response.json()).then(data => console.log(data));
