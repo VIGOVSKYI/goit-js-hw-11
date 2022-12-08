@@ -22,46 +22,49 @@ async function onSearch(e) {
     &q=${searchValue}&per_page=10&page=1
     &image_type=photo&orientation=horizontal&safesearch=true`
   
-  try {
-    const response = await axios.get(URL);
-    console.log(response);
-    const Object = response.json();
+ 
+  const response = await axios.get(URL);
+  
+  console.log(response);
+  
+  const objectPhoto = response.json();
+  
+  console.log(objectPhoto);
+  
+    return objectPhoto;
+  
 
-    console.log(Object);
-
-    const markup = response.map((key) => 
-                       
-      `<div class="photo-card">
-  <img src=${key.webformatURL} alt=${key.tags} loading="lazy" />
-  <div class="info">
-    <p class="info-item">
-      <b>Likes ${key.likes}</b>
-    </p>
-    <p class="info-item">
-      <b>Views ${key.views}</b>
-    </p>
-    <p class="info-item">
-      <b>Comments ${key.comments}</b>
-    </p>
-    <p class="info-item">
-      <b>Downloads ${key.downloads}</b>
-    </p>
-  </div>
-</div>`)
-    .join("");
-    
-    console.log(markup);
-//   galleryContainer.insertAdjacentHTML("beforeend", markup);
-    
-  } catch (error) {
-    console.error(error);
-}
-  // axios(URL).then(data => console.log(data)).catch(error => console.log(error));
+// axios(URL).then(data => console.log(data)).catch(error => console.log(error));
 };
 
-// console.log("рес",response);
 
 
+
+
+// const markup = Object.map((key) => 
+
+//       `<div class="photo-card">
+//   <img src=${key.webformatURL} alt=${key.tags} loading="lazy" />
+//   <div class="info">
+//     <p class="info-item">
+//       <b>Likes ${key.likes}</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Views ${key.views}</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Comments ${key.comments}</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Downloads ${key.downloads}</b>
+//     </p>
+//   </div>
+// </div>`)
+//     .join("");
+
+//     console.log(markup);
+
+//   galleryContainer.insertAdjacentHTML("beforeend", markup);
 
 
     
