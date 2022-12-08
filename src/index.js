@@ -23,13 +23,38 @@ async function onSearch(e) {
     &image_type=photo&orientation=horizontal&safesearch=true`
   
 try {
-    const response = await axios.get(URL);
-    console.log(response);
+  const response = await axios.get(URL);
+  // console.log(response);
+//   const markup = response.map((key) =>
+                       
+//   `<div class="photo-card">
+//   <img src=${key.webformatURL} alt=${key.tags} loading="lazy" />
+//   <div class="info">
+//     <p class="info-item">
+//       <b>Likes ${key.likes}</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Views ${key.views}</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Comments ${key.comments}</b>
+//     </p>
+//     <p class="info-item">
+//       <b>Downloads ${key.downloads}</b>
+//     </p>
+//   </div>
+// </div>`)
+// .join("");
+  
+//   galleryContainer.insertAdjacentHTML("beforeend", markup);
+    
   } catch (error) {
     console.error(error);
-  }
+}
   // axios(URL).then(data => console.log(data)).catch(error => console.log(error));
 };
+
+// console.log("рес",response);
 
 
 
