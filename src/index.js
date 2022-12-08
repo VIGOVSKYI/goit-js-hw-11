@@ -6,7 +6,8 @@ const searchFormRef = document.querySelector("#search-form");
 
 const galleryContainer = document.querySelector(".gallery");
 
-searchFormRef.addEventListener("submit",onSearch);
+searchFormRef.addEventListener("submit", onSearch);
+
 
 async function onSearch(e) {
     e.preventDefault();
@@ -19,7 +20,7 @@ async function onSearch(e) {
 
     const URL = `https://pixabay.com/api/?key=${API_KEY}
     &q=${searchValue}&per_page=10&page=1
-    &image_type=fhoto&orientation=horizontal&safesearch=true`
+    &image_type=photo&orientation=horizontal&safesearch=true`
   
 try {
     const response = await axios.get(URL);
@@ -34,51 +35,3 @@ try {
 
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <div class="photo-card">
-  <img src="" alt="" loading="lazy" />
-  <div class="info">
-    <p class="info-item">
-      <b>Likes</b>
-    </p>
-    <p class="info-item">
-      <b>Views</b>
-    </p>
-    <p class="info-item">
-      <b>Comments</b>
-    </p>
-    <p class="info-item">
-      <b>Downloads</b>
-    </p>
-  </div>
-</div> */}
