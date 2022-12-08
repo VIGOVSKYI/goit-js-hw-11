@@ -23,15 +23,39 @@ async function onSearch(e) {
     &image_type=photo&orientation=horizontal&safesearch=true`
   
  
-  const response = await axios.get(URL);
+  // const response =
+  await axios.get(URL).then(response => {response.map((key) => 
+
+      `<div class="photo-card">
+  <img src=${key.webformatURL} alt=${key.tags} loading="lazy" />
+  <div class="info">
+    <p class="info-item">
+      <b>Likes ${key.likes}</b>
+    </p>
+    <p class="info-item">
+      <b>Views ${key.views}</b>
+    </p>
+    <p class="info-item">
+      <b>Comments ${key.comments}</b>
+    </p>
+    <p class="info-item">
+      <b>Downloads ${key.downloads}</b>
+    </p>
+  </div>
+</div>`)
+    .join("");
+
+    console.log(markup);
+      
+    });
   
   console.log(response);
   
-  const objectPhoto = response.json();
+  // const objectPhoto = response.json();
   
-  console.log(objectPhoto);
+  // console.log(objectPhoto);
   
-    return objectPhoto;
+  //   return objectPhoto;
   
 
 // axios(URL).then(data => console.log(data)).catch(error => console.log(error));
