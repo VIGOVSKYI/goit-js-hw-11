@@ -1,5 +1,7 @@
 import './css/styles.css';
 
+import axios from "axios";
+
 const searchFormRef = document.querySelector("#search-form");
 
 const galleryContainer = document.querySelector(".gallery");
@@ -16,10 +18,10 @@ function onSearch(e) {
     const API_KEY = "31894288-d396035e6b984cce02ff6ba47";
 
     const URL = `https://pixabay.com/api/?key=${API_KEY}
-    &q=${searchValue}&per_page=20&page=1
+    &q=${searchValue}&per_page=10&page=1
     &image_type=fhoto&orientation=horizontal&safesearch=true`
 
-    fetch(URL).then(response => response.json()).then(data => console.log(data));
+    axios(URL).then(data => console.log(data)).catch(error => console.log(error));
 
 };
 
