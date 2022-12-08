@@ -1,2 +1,0 @@
-!function(){var e=document.querySelector("#search-form");document.querySelector(".gallery");e.addEventListener("submit",(function(e){e.preventDefault();var t=e.currentTarget.elements.searchQuery.value;console.log(t);var n="https://pixabay.com/api/?key=".concat("31894288-d396035e6b984cce02ff6ba47","\n    &q=").concat(t,"&per_page=20&page=1\n    &image_type=fhoto&orientation=horizontal&safesearch=true");fetch(n).then((function(e){return e.json()})).then((function(e){return console.log(e)}))}))}();
-//# sourceMappingURL=index.08f4688f.js.map
