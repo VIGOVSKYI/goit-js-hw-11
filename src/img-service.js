@@ -39,5 +39,4 @@ async axiosApiImg() {
         this.searchValue = NewQuery;
     }
 
-
 }
