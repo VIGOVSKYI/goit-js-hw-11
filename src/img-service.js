@@ -15,7 +15,7 @@ async axiosApiImg() {
 
   const API_KEY = "31953746-f18352ce1cc5baacf746e1b6b";
 
-  const URL = `https://pixabay.com/api/?key=${API_KEY}&q=${this.searchValue}&per_page=100&page=${this.page}&image_type=photo&orientation=horizontal&safesearch=true`
+  const URL = `https://pixabay.com/api/?key=${API_KEY}&q=${this.searchValue}&per_page=40&page=${this.page}&image_type=photo&orientation=horizontal&safesearch=true`
   
        return await axios.get(URL).then(response => {
         // console.log("response.data.totalHits",response.data.totalHits);

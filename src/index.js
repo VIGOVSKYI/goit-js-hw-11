@@ -50,35 +50,41 @@ function onSearch(e) {
   showloadMoreBtn();
 };
 
+
 function loadMore() {
   imgApiService.axiosApiImg().then(renderImg);
-  }
+};
+
 
 function renderImg() {
   imgApiService.axiosApiImg().then(data => {
 
-  console.log("data", data);
+  // console.log("data", data.hits);
+
+let totalPages = Math.ceil(data.totalHits / data.hits.length) || null;
     
-  if (data.hits.length === 0) {
-    Notiflix.Notify.failure(
-    "Sorry, there are no images matching your search query. Please try again.",
-             {
-               fontSize: '15px',
-               timeout: 3000,
-             }
-               )
+    if (data.totalHits === 0) {
+
+      Notiflix.Notify.failure(
+        "Sorry, there are no images matching your search query. Please try again.",
+        {
+          fontSize: '15px',
+          timeout: 3000,
+        }
+      );
     };
-    // if (data.totalHits) {
-    //   hideloadMoreBtn();
-    // Notiflix.Notify.failure(
-    // "We're sorry, but you've reached the end of search results.",
-    //          {
-    //            fontSize: '15px',
-    //            timeout: 3000,
-    //          }
-    //            )
-   
-    //          }
+
+    if (imgApiService.page === totalPages) {
+      hideloadMoreBtn();
+    
+      Notiflix.Notify.failure(
+        "We're sorry, but you've reached the end of search results.",
+        {
+          fontSize: '15px',
+          timeout: 3000,
+        }
+      );
+   };
   
   const markup = data.hits.map((key) =>
       `<div class="photo-card">
@@ -104,32 +110,12 @@ function renderImg() {
     galleryContainer.insertAdjacentHTML("beforeend", markup);
   })
   .catch(error => {
-    // if (error) {
-    //   hideloadMoreBtn();
+  
+    console.log(error);
 
-    // Notiflix.Notify.failure(
-    // "We're sorry, but you've reached the end of search results.",
-    //          {
-    //            fontSize: '15px',
-    //            timeout: 3000,
-    //          }
-    //            )
-    //          }
- 
-});
+  });
+  
 };
-
-
-
-
-
-// Notiflix.Notify.success(
-//              "Too many matches found. Please enter a more specific name.",
-//              {
-//                fontSize: '15px',
-//                timeout: 1500,
-//              }
-//            )
   
 
 
