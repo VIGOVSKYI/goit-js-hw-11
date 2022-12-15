@@ -40,8 +40,6 @@ hideloadMoreBtn();
 function onSearch(e) {
 
   e.preventDefault();
-
-  // hideloadMoreBtn();
   
   clearContainer();
   
@@ -54,8 +52,7 @@ function onSearch(e) {
     // console.log(imgApiService.query);
   
     imgApiService.axiosApiImg().then(renderImg);
-    
-    showloadMoreBtn();
+   
   }
 };
 
@@ -82,7 +79,7 @@ if (imgApiService.page === totalPages) {
       timeout: 3000,
     }
   );
-  
+  return
     };
     
 if (data.totalHits === 0) {
@@ -95,7 +92,8 @@ if (data.totalHits === 0) {
           fontSize: '15px',
           timeout: 3000,
         }
-        );
+      );
+  return
       };
 
 const markup = data.hits.map((key) =>
@@ -126,6 +124,8 @@ const markup = data.hits.map((key) =>
     // console.log(markup);
 
     galleryContainer.insertAdjacentHTML("beforeend", markup);
+    
+    showloadMoreBtn();
   })
   .catch(error => {
    console.log(error);
