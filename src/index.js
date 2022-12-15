@@ -4,12 +4,18 @@ import { ImgApiService } from "./img-service";
 
 import Notiflix from 'notiflix';
 
+// import SimpleLightbox from 'simplelightbox';
+
+// import 'simplelightbox/dist/simple-lightbox.min.css';
+
+
+
 
 const searchFormRef = document.querySelector("#search-form");
 
 const loadMoreBtnRef = document.querySelector(".load-more");
 
-const galleryContainer = document.querySelector(".gallery");
+const galleryContainer = document.querySelector(".gallery__list");
 
 const  imgApiService  = new ImgApiService();
 
@@ -32,6 +38,7 @@ function clearContainer() {
 hideloadMoreBtn();
 
 function onSearch(e) {
+
   e.preventDefault();
 
   hideloadMoreBtn();
@@ -40,14 +47,16 @@ function onSearch(e) {
   
   imgApiService.query = e.currentTarget.elements.searchQuery.value;
 
+  if (imgApiService.query !== "") {
+
+    imgApiService.resetPage();
   
-  imgApiService.resetPage();
+    // console.log(imgApiService.query);
   
-  // console.log(imgApiService.query);
+    imgApiService.axiosApiImg().then(renderImg);
   
-  imgApiService.axiosApiImg().then(renderImg);
-  
-  showloadMoreBtn();
+    showloadMoreBtn();
+  }
 };
 
 
@@ -57,6 +66,7 @@ function loadMore() {
 
 
 function renderImg() {
+  
   imgApiService.axiosApiImg().then(data => {
 
   // console.log("data", data.hits);
@@ -87,33 +97,37 @@ let totalPages = Math.ceil(data.totalHits / data.hits.length) || null;
    };
   
   const markup = data.hits.map((key) =>
-      `<div class="photo-card">
-<img src=${key.webformatURL} alt=${key.tags} loading="lazy" width="300" height="300"/>
-<div class="info">
-  <p class="info-item">
-    <b>Likes ${key.likes}</b>
-  </p>
-  <p class="info-item">
-    <b>Views ${key.views}</b>
-  </p>
-  <p class="info-item">
-    <b>Comments ${key.comments}</b>
-  </p>
-  <p class="info-item">
-    <b>Downloads ${key.downloads}</b>
-  </p>
-</div>
-</div>`)
+      `<li class="gallery__item gallery">
+      <a class="gallery__link" href="${key.largeImageURL}">
+      <img class="gallery__img" src="${key.webformatURL}" alt="${key.tags}" loading="lazy" width=400/>
+      </a>
+      <div class="gallery__info">
+      <ul class="gallery__details-list"><li class="gallery__details-item"><p class="gallery__details">
+          <b>Likes</b>
+          ${key.likes}
+        </p></li>
+        <li class="gallery__details-item"><p class="gallery__details">
+          <b>Views</b>
+          ${key.views}
+        </p></li>
+        <li class="gallery__details-item"><p class="gallery__details">
+          <b>Comments</b>
+          ${key.comments}
+        </p></li>
+        <li class="gallery__details-item"><p class="gallery__details">
+          <b>Downloads</b>
+          ${key.downloads}
+        </p></li></ul>
+      </div>
+    </li>`)
       .join("");
     // console.log(markup);
 
     galleryContainer.insertAdjacentHTML("beforeend", markup);
   })
   .catch(error => {
-  
-    console.log(error);
-
-  });
+   console.log(error);
+});
   
 };
   
