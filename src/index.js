@@ -66,8 +66,6 @@ function loadMore() {
 
 
 function renderImg() {
-  
-   
   imgApiService.axiosApiImg().then(data => {
 
   // console.log("data", data.hits);
@@ -87,7 +85,7 @@ if (imgApiService.page === totalPages) {
   
     };
     
-    if (data.totalHits === 0) {
+if (data.totalHits === 0) {
     
       hideloadMoreBtn();
       
@@ -100,8 +98,7 @@ if (imgApiService.page === totalPages) {
         );
       };
 
-  
-  const markup = data.hits.map((key) =>
+const markup = data.hits.map((key) =>
       `<li class="gallery__item gallery">
       <a class="gallery__link" href="${key.largeImageURL}">
       <img class="gallery__img" src="${key.webformatURL}" alt="${key.tags}" loading="lazy" width=400/>
