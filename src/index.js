@@ -41,20 +41,20 @@ function onSearch(e) {
 
   e.preventDefault();
 
-  hideloadMoreBtn();
+  // hideloadMoreBtn();
   
   clearContainer();
   
   imgApiService.query = e.currentTarget.elements.searchQuery.value;
 
-  if (imgApiService.query !== "") {
+  if (imgApiService.query.trim() !== "") {
 
     imgApiService.resetPage();
   
     // console.log(imgApiService.query);
   
     imgApiService.axiosApiImg().then(renderImg);
-  
+    
     showloadMoreBtn();
   }
 };
@@ -67,34 +67,39 @@ function loadMore() {
 
 function renderImg() {
   
+   
   imgApiService.axiosApiImg().then(data => {
 
   // console.log("data", data.hits);
 
 let totalPages = Math.ceil(data.totalHits / data.hits.length) || null;
     
-    if (data.totalHits === 0) {
+if (imgApiService.page === totalPages) {
+  hideloadMoreBtn();
 
+  Notiflix.Notify.failure(
+    "We're sorry, but you've reached the end of search results.",
+    {
+      fontSize: '15px',
+      timeout: 3000,
+    }
+  );
+  
+    };
+    
+    if (data.totalHits === 0) {
+    
+      hideloadMoreBtn();
+      
       Notiflix.Notify.failure(
         "Sorry, there are no images matching your search query. Please try again.",
         {
           fontSize: '15px',
           timeout: 3000,
         }
-      );
-    };
+        );
+      };
 
-    if (imgApiService.page === totalPages) {
-      hideloadMoreBtn();
-    
-      Notiflix.Notify.failure(
-        "We're sorry, but you've reached the end of search results.",
-        {
-          fontSize: '15px',
-          timeout: 3000,
-        }
-      );
-   };
   
   const markup = data.hits.map((key) =>
       `<li class="gallery__item gallery">
@@ -127,6 +132,7 @@ let totalPages = Math.ceil(data.totalHits / data.hits.length) || null;
   })
   .catch(error => {
    console.log(error);
+
 });
   
 };
