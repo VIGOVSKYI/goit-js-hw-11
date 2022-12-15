@@ -42,6 +42,8 @@ function onSearch(e) {
   e.preventDefault();
   
   clearContainer();
+
+  hideloadMoreBtn();
   
   imgApiService.query = e.currentTarget.elements.searchQuery.value;
 
@@ -83,8 +85,6 @@ if (imgApiService.page === totalPages) {
     };
     
 if (data.totalHits === 0) {
-    
-      hideloadMoreBtn();
       
       Notiflix.Notify.failure(
         "Sorry, there are no images matching your search query. Please try again.",
@@ -124,7 +124,7 @@ const markup = data.hits.map((key) =>
     // console.log(markup);
 
     galleryContainer.insertAdjacentHTML("beforeend", markup);
-    
+
     showloadMoreBtn();
   })
   .catch(error => {
