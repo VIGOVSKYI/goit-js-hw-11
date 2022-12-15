@@ -14,7 +14,7 @@ body {
 
 li {
   list-style: none;
-
+  
 }
 
 
@@ -55,10 +55,6 @@ li {
   color: #f5f5f7;
   background-color: rgba(255, 255, 255, 0.125);
 
-  /* &::placeholder {
-    color: white;
-    font-size: 20px;
-  } */
 }
 
 .search-form__button {
@@ -77,7 +73,6 @@ li {
                         /* Search-form (end) */
 
 .gallery__wrapper {
-  /* display: flex; */
   padding: 100px 0;
 }
 
