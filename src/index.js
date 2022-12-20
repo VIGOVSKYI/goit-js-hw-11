@@ -4,9 +4,9 @@ import { ImgApiService } from "./img-service";
 
 import Notiflix from 'notiflix';
 
-// import SimpleLightbox from 'simplelightbox';
+import SimpleLightbox from 'simplelightbox';
 
-// import 'simplelightbox/dist/simple-lightbox.min.css';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 
 
@@ -17,11 +17,12 @@ const loadMoreBtnRef = document.querySelector(".load-more");
 
 const galleryContainer = document.querySelector(".gallery__list");
 
-const  imgApiService  = new ImgApiService();
+const imgApiService  = new ImgApiService();
 
 searchFormRef.addEventListener("submit", onSearch);
 
 loadMoreBtnRef.addEventListener("click", loadMore);
+galleryContainer.addEventListener("click", handlerCkick);
 
 function showloadMoreBtn() {
 loadMoreBtnRef.classList.remove("is-hidden");
@@ -94,7 +95,8 @@ if (data.totalHits === 0) {
         }
       );
   return
-      };
+    };
+    
 
 const markup = data.hits.map((key) =>
       `<li class="gallery__item gallery">
@@ -133,10 +135,25 @@ const markup = data.hits.map((key) =>
 });
   
 };
+
+function handlerCkick(event) {
+  event.preventDefault();
+  
+    if (!event.target.classList.contains("gallery__img")) {
+        return
+    }
+    console.log(event.target)
+    
+
+  const lightbox = new SimpleLightbox('.gallery a', { captionsData: "alt", captionDelay: 250 });
+  
+  lightbox.refresh();
+    
+}
   
 
-
-
+  
+  
 
   
 
